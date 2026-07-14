@@ -1,0 +1,29 @@
+# --- build outputs ---
+/target/
+dist/
+out/
+
+# --- dependencies (not used by this std-only crate; kept for baseline compliance) ---
+node_modules/
+.venv/
+venv/
+__pycache__/
+
+# --- packet captures & fixtures that should not be committed ---
+*.pcap
+*.pcapng
+*.har
+
+# --- env & secrets ---
+.env
+.env.*
+!.env.example
+
+# --- caches / editor / OS ---
+.DS_Store
+.idea/
+.vscode/
+.cache/
+coverage/
+*.log
+tmp/

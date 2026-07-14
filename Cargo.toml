@@ -1,0 +1,18 @@
+[package]
+name = "plainwire"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+description = "Craft and inspect raw HTTP/1.1 exchanges byte-by-byte, flagging Content-Length / Transfer-Encoding smuggling ambiguities."
+license = "MIT"
+repository = "https://github.com/JaydenCJ/plainwire"
+keywords = ["http", "smuggling", "desync", "security", "netcat"]
+categories = ["command-line-utilities"]
+
+# No runtime dependencies. plainwire is std-only on purpose: a byte-accurate
+# HTTP/1.1 parser must not inherit a third party's framing decisions.
+[dependencies]
+
+[profile.release]
+strip = true
+lto = true

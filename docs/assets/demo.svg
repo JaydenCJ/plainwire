@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="622" viewBox="0 0 1080 622" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15">
+  <!-- Terminal rendering of a real plainwire session (output copied verbatim
+       from a container run on 2026-07-12; byte offsets are from that run). -->
+  <rect width="1080" height="622" rx="10" fill="#1c2128"/>
+  <rect width="1080" height="34" rx="10" fill="#2d333b"/>
+  <rect y="24" width="1080" height="10" fill="#2d333b"/>
+  <circle cx="20" cy="17" r="6" fill="#f47067"/>
+  <circle cx="40" cy="17" r="6" fill="#e0b543"/>
+  <circle cx="60" cy="17" r="6" fill="#57ab5a"/>
+  <text x="540" y="22" text-anchor="middle" fill="#909dab">plainwire — is this request a CL.TE desync?</text>
+
+  <g fill="#adbac7">
+    <text x="24" y="66"><tspan fill="#6cb6ff">$</tspan> plainwire craft --smuggle cl.te <tspan fill="#768390">| plainwire inspect --request -</tspan></text>
+
+    <text x="24" y="98" fill="#909dab">plainwire — request, 3 header(s), 92 byte(s)</text>
+    <text x="24" y="124">start-line  <tspan fill="#768390">[0..15]</tspan></text>
+    <text x="24" y="150">  method   POST      target  /      version  HTTP/1.1</text>
+
+    <text x="24" y="182">headers (3)</text>
+    <text x="24" y="208"><tspan fill="#768390">  [17..35]</tspan>  Host: example.test</text>
+    <text x="24" y="234"><tspan fill="#768390">  [37..54]</tspan>  <tspan fill="#f0a35e">Content-Length: 6</tspan></text>
+    <text x="24" y="260"><tspan fill="#768390">  [56..82]</tspan>  <tspan fill="#f0a35e">Transfer-Encoding: chunked</tspan></text>
+
+    <text x="24" y="292">body  <tspan fill="#768390">[86..91]</tspan>   framing <tspan fill="#96d0ff">chunked</tspan>   decoded 0 byte(s)   complete yes</text>
+
+    <text x="24" y="324" fill="#909dab">framing: chunked (Transfer-Encoding wins; Content-Length is ignored)</text>
+
+    <text x="24" y="360">findings: <tspan fill="#f47067">1 error(s)</tspan>, <tspan fill="#e0b543">1 warn(s)</tspan>, 0 info</text>
+    <text x="24" y="386">  <tspan fill="#f47067">error</tspan>  <tspan fill="#f0f0f0">PW001</tspan>  both-cl-te</text>
+    <text x="24" y="410" fill="#909dab">         both Content-Length and Transfer-Encoding are present;</text>
+    <text x="24" y="432" fill="#909dab">         conforming servers use chunked and ignore Content-Length</text>
+    <text x="24" y="454" fill="#768390">         at bytes 37..82</text>
+    <text x="24" y="480">  <tspan fill="#e0b543">warn</tspan>   <tspan fill="#f0f0f0">PW017</tspan>  trailing-body-bytes</text>
+    <text x="24" y="502" fill="#909dab">         1 byte(s) follow the chunked body (smuggled request prefix)</text>
+    <text x="24" y="524" fill="#768390">         at bytes 91..92</text>
+
+    <text x="24" y="560"><tspan fill="#6cb6ff">$</tspan> plainwire craft --smuggle cl.te <tspan fill="#768390">| plainwire lint --request -</tspan> ; <tspan fill="#768390">echo $?</tspan></text>
+    <text x="24" y="586" fill="#f47067">  error  PW001  both-cl-te   <tspan fill="#768390">…</tspan>   <tspan fill="#adbac7">exit</tspan> <tspan fill="#f47067">1</tspan></text>
+  </g>
+</svg>
